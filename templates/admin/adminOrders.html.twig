@@ -1,0 +1,48 @@
+{% extends 'core/base.html.twig' %}
+
+{% block title %}
+	Dark Rosted Coffee
+{% endblock %}
+
+{% block content %}
+	<h3 class="text-center mt-3 title-site">Admin - Orders</h3>
+	{% include 'admin/navbarAdmin.html.twig' %}
+
+	<div class="row page">
+		<div class="col-8 mx-auto mb-3 mt-5">
+			<table class="table text-center table-bordered">
+				<thead class="table-dark">
+					<tr>
+						<th scope="col"># Order</th>
+						<th scope="col">Client name</th>
+						<th scope="col">Command date</th>
+						<th scope="col">Status</th>
+						<th scope="col">Details</th>
+					</tr>
+				</thead>
+				<tbody class="table-body">
+					{% for order in orders %}
+						<tr>
+							<td>{{ order.idOrder }}</td>
+							<td>{{ order.user.firstname }}
+								{{ order.user.lastname }}</td>
+							<td>{{ order.orderDate | date("m/d/Y H:i", "America/Toronto") }}</td>
+							<td>{{ order.state }}</td>
+							<td>
+								<a href="{{ path('route_adminUpdateOrders', {idOrder: order.idOrder})}}">
+									<i class="fas fa-eye"></i>
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('styles/interfaceAdmin.css') }}">
+	<link rel="stylesheet" href="{{ asset('styles/base.css') }}">
+{% endblock %}

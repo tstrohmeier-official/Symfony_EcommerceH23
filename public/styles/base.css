@@ -1,0 +1,28 @@
+.all-page {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS';
+    font-size: 20px;
+}
+
+.notification {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.title-site {
+        color: grey;
+        font-style: italic;
+}
+
+.btnSite {
+    color: white;
+    background-color: grey;
+    font-size: 20px;
+    border: 2px solid grey;
+    margin-right: 10px;
+ }
+ 
+ .btnSite:hover {
+    color: #F75C03;
+    border: 2px solid grey;
+    background-color: white;
+ }

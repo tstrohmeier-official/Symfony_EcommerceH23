@@ -1,0 +1,52 @@
+{% extends 'core/base.html.twig' %}
+{% form_theme formCategories 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}
+	Dark Rosted Coffee
+{% endblock %}
+
+{% block content %}
+	<h3 class="text-center mt-3 title-site">Categories management</h3>
+	{% include 'admin/navbarAdmin.html.twig' %}
+	<div class="row page">
+		<div class="col-10 mx-auto p-3 panel m-5">
+			{% for flash in app.flashes('categoryUpdate') %}
+				<div class="alert {{ flash.color }} notification mt-4">
+					<i class="{{ flash.icon }}"></i>
+					{{ flash.content }}</div>
+			{% endfor %}
+			{{ form_start(formCategories, {'attr': {'class': 'needs-validation-categories', 'novalidate': 'novalidate' }}) }}
+			<div class="row">
+				<div class="col-10">
+					<ol class="categories row" data-index="{{ formCategories.categories|length > 0 ? formCategories.categories|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(formCategories.categories.vars.prototype)|e('html_attr') }}">
+						{% for category in formCategories.categories %}
+							<li class="col-5 m-1">
+								{{ form_row(category.category) }}
+							</li>
+						{% endfor %}
+					</ol>
+				</div>
+				<div class="col-2">
+					<div class="form-button">
+						<button type="button" class="add_item_link btn btnSite mb-3" data-collection-holder-class="categories">Add category</button>
+						{{ form_row(formCategories.btnSave) }}
+						<a href="{{ path('route_adminCategories') }}">
+							<button type="button" class="btn btnSite">Cancel</button>
+						</a>
+					</div>
+				</div>
+			</div>
+			{{ form_rest(formCategories) }}
+			{{ form_end(formCategories) }}
+		</div>
+	</div>
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('styles/interfaceAdmin.css') }}">
+	<link rel="stylesheet" href="{{ asset('styles/base.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('scripts/admin.js') }}"></script>
+{% endblock %}

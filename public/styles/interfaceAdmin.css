@@ -1,0 +1,36 @@
+.page {
+    min-height: 57vh;
+}
+
+.panel {
+    border-radius: 15px;
+    border: 2px solid #16DB65;
+}
+
+.input-field {
+    width: 50vh;
+}
+
+.btnSite {
+    color: white;
+    background-color: grey;
+    font-size: 24px;
+    border: 2px solid grey;
+    width: 25vh;
+}
+
+.btnSite:hover {
+    color: #F75C03;
+    border: 2px solid grey;
+    background-color: white;
+}
+
+table i {
+    font-size: 18px;
+    color: grey;
+}
+
+table i:hover {
+    color: red;
+    cursor: pointer;
+}

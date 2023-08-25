@@ -1,0 +1,99 @@
+{% extends 'core/base.html.twig' %}
+
+{% block title %}
+	Dark Rosted Coffee
+{% endblock %}
+
+{% block content %}
+	<div class="row mb-5 body">
+
+		{# Left - Type list #}
+		<div class="col-xxl-2 col-md-4 row side-bar px-md-5">
+			<ul>
+				<a href="{{path('route_catalogue') }}">
+					<li>All</li>
+				</a>
+				{% for category in categories %}
+					<a href="{{ path('route_catalogue' , { category: category.idCategory }) }}">
+						<li>{{ category.category }}
+							-
+							{{ category.getProducts() | length }}</li>
+					</a>
+				{% endfor %}
+			</ul>
+		</div>
+
+		{# Products #}
+		<div class="col-xxl-10 col-md-8">
+			<div
+				class="row">
+				{# Top - Product type #}
+				<h2 class="title-site mt-3 mb-3">
+					Our products - ({{products | length}})
+				</h2>
+				{% if products | length > 0 %}
+					{% for product in products %}
+						<div
+							class="m-md-3 mb-3 col-xxl-3 col-md-5 card card-modal">
+							{# Section card #}
+							<div>
+								<a class="product-modal text-center align-self-center " href="{{ path('product-modal', {idProduct: product.idProduct})}}">
+									<div
+										class="card-header">
+										{# Card title #}
+										<h5 class="card-title text-center">{{ product.name }}</h5>
+									</div>
+									{# Product image #}
+									<div class="card-body">
+										<img class="img-fluid" src="{{ asset_if(product.imagePath, 'images/products/imageMissing.png') }}" alt="Image product">
+									</div>
+								</a>
+							</div>
+							<div
+								class="card-footer">
+								{# Price #}
+								<div class="m-2 text-center">
+									<span>{{ product.price | number_format(2, '.',)}}$</span>/each
+								</div>
+								{# Buy button && View button #}
+								<div class="row icons">
+									<div class="col-6">
+										<a href="{{ path('add_purchase', {idProduct: product.idProduct})}}">
+											<i class="fa-solid fa-cart-plus btn-purchase"></i>
+										</a>
+									</div>
+									<a class="product-modal col-6 align-self-center text-end" href="{{ path('product-modal', {idProduct: product.idProduct})}}">
+										<i class="fa-solid fa-circle-info"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+
+					{# Section no available products #}
+				{% else %}
+					<div>
+						<p>Sorry, no products are available in this categorie.</p>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+	{# Section modal products #}
+	<div class="modal fade" tabindex="-1" id="product-modal">
+		<div class="modal-dialog modal-lg">
+			<div id="product-modal-content" class="modal-content"></div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('styles/catalogue.css') }}">
+	<link rel="stylesheet" href="{{ asset('styles/modal.css') }}">
+	<link rel="stylesheet" href="{{ asset('styles/base.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('scripts/modal.product.js') }}"></script>
+{% endblock %}

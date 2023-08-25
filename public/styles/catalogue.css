@@ -1,0 +1,64 @@
+.side-bar a {
+    text-decoration: none;
+    list-style: none;
+    color: grey;
+    font-size: 18px;
+    margin: 0.5em;
+}
+
+.side-bar a:hover li {
+    font-weight: bold;
+    margin-left: 1em;
+    border-bottom: #16DB65 solid 2px;
+}
+
+.card {
+    border-width: 2px;
+}
+
+.card span {
+    font-weight: bold;
+    color: red;
+}
+
+.card-modal:hover {
+    border-color: #16DB65;
+}
+
+.card-modal:hover .card-title {
+    font-weight: bold;
+}
+
+.card-header {
+    border-style: none;
+    background-color: transparent;
+    color: grey;
+}
+
+.card-footer {
+    background-color: transparent;
+}
+
+.card-body img {
+    height: 250px;
+    width: auto;
+    padding: auto;
+}
+
+.icons i {
+    font-size: 32px;
+    color: grey;
+}
+
+.icons i:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.product-modal {
+    cursor: zoom-in;
+}
+
+.body {
+    min-height: 100vh;
+}

@@ -1,0 +1,56 @@
+.icons-socials a{
+    margin: 3px;
+    color: white;
+    font-size: 24px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.user-profil {
+    font-size: 24px;
+    color: white;
+}
+
+.user-profil img {
+    width: 45px;
+}
+
+
+.icons-socials a:hover {
+    color: #F75C03;
+}
+
+.txt-cart {
+    color: white;
+    font-size: 24px;
+}
+
+.navbar {
+    border-bottom: #141115 solid 2px;
+    opacity: 0.8;
+}
+
+.top-section {
+    background-color: #141115;
+    opacity: 0.8;
+}
+
+.nav-link {
+    font-size: 24px;
+}
+
+.nav-link:hover {
+    font-weight: bold;
+}
+
+.sticky-top {
+    border-bottom: #16DB65 solid 5px;
+}
+
+.section-bas {
+    background-color: #141115;
+    border-top: #16DB65 solid 5px;
+    opacity: 0.8;
+}

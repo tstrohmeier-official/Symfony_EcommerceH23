@@ -1,0 +1,36 @@
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('styles/modal.css') }}">
+{% endblock %}
+
+<div class="modal-header">
+	<h5 class="modal-title">{{ product.name }}</h5>
+	<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+	<div class="row">
+		<div class="col-6">
+			<img class="img-fluid" src="{{ asset_if(product.imagePath, 'images/products/imageMissing.png') }}" alt="Image product">
+		</div>
+		<div class="col-6">
+			<p><span>Category:</span> {{ product.mainCategory.category }}</p>
+			<hr>
+			<p><span>Description:</span><br>
+				{{ product.description }}
+			</p>
+		</div>
+		<div class="text-center align-content-center col-12 row">
+			<div class="col-6">
+					<span>Price:</span>
+					<span class="infos-font">{{ product.price | number_format(2, '.',)}}$</span>/each.
+			</div>
+			<div class="col-6">
+					<span>Quantity in stock:</span>
+					<span class="infos-font">{{ product.quantityInStock}}</span>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<a href="{{ path('add_purchase', {idProduct: product.idProduct}) }}"><button type="button" class="btn btn-secondary">Add to basket <i class="fa-solid fa-cart-plus"></i></button></a>
+	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+</div>

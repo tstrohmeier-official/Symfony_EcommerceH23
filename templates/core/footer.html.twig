@@ -1,0 +1,32 @@
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('styles/footer.css') }}">
+{% endblock %}
+
+<footer class="footer row pt-3" id="footer">
+	<div class="offset-2 col-8 d-md-flex justify-content-md-between">
+		<div>
+		<h5>More info</h5>
+			<ul>
+				<a href="#"><li>Return policies</li></a>
+				<a href="#"><li>Copyrights</li></a>
+				<a href="{{ path('route_contacts') }}"><li>Contacts</li></a>
+			</ul>
+		</div>
+		<div class="m-3 m-md-0">
+			<form class="d-flex" method="POST" action="{{ app.request.uri }}">
+				<input name="newsLetter" class="form-control me-2" type="email" placeholder="email adress">
+				<button class="btn btn-dark" type="submit">Send</button>
+			</form>
+		</div>
+		<div>
+			<h5>Company</h5>
+			<ul>
+				<a href="#"><li>Contacts</li></a>
+				<a href="#"><li>About</li></a>
+				<a href="#"><li>Careers</li></a>
+				<a href="#"><li>News</li></a>
+				<a href="#"><li>Our Commitment</li></a>
+			</ul>
+		</div>			
+	</div>
+</footer>

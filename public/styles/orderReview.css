@@ -1,0 +1,30 @@
+.img-product {
+    height: 80px;
+    width: auto;
+}
+
+.page {
+    min-height: 55vh;
+}
+
+.table-body td{
+    vertical-align: middle;
+}
+
+.table-body input {
+    width: 75px;
+}
+
+table i {
+    font-size: 18px;
+    color: grey;
+}
+
+table i:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.summary-table {
+    font-size: 24px;
+}

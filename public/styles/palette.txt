@@ -1,0 +1,5 @@
+night: #141115
+linen: #F3E9DC
+malachite: #16DB65
+Orange: #F75C03
+Pomp and Power: #8F6593

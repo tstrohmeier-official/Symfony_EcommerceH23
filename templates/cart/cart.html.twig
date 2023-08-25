@@ -1,0 +1,86 @@
+{% extends 'core/base.html.twig' %}
+
+{% block title %}
+	Dark Rosted Coffee
+{% endblock %}
+
+{% block content %}
+
+	<div class="row page my-md-4 mx-xxl-5">
+		<div class="col-md-8 order-2 order-md-1">
+			{% for flash in app.flashes('cart') %}
+				<div class="alert {{ flash.color }} notification mt-4"><i class="{{ flash.icon }}"></i> {{ flash.content }}</div>
+			{% endfor %}
+			{% for flash in app.flashes('order') %}
+				<div class="alert {{ flash.color }} notification"><i class="{{ flash.icon }}"></i> {{ flash.content }}</div>
+			{% endfor %}
+				<table class="table text-center table-bordered">
+					<thead class="table-dark">
+						<tr>
+							<th scope="col">Product</th>
+							<th scope="col">Name</th>
+							<th scope="col">Unit price</th>
+							<th scope="col">Quantity</th>
+							<th scope="col">Total</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<form method="POST" action="{{ path('update_cart') }}">
+					<tbody class="table-body">
+						{% for key, purchase in cart.items %}
+							<tr>
+								<td><img class="img-fluid img-product" src="{{ asset_if(purchase.product.imagePath, 'images/products/imageMissing.png') }}" alt="Image product"></td>
+								<td>{{ purchase.product.name }}</td>
+								<td>{{ purchase.product.price }}$</td>
+								<td><input name="{{ 'txtQuantity[' ~ key ~ ']' }}" value="{{ purchase.quantity }}" type="number" min="0" max="99" required></input></td>
+								<td>{{ purchase.product.price * purchase.quantity }}$</td>
+								<td class="icon-delete">
+									<a href="{{ path('delete_purchase', {index: key }) }}">
+										<i class="fa-solid fa-trash"></i>
+									</a>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			<div>
+				<button name="action" value="update" type="submit" class="btn btnSite">Modify</button>
+				<button name="action" value="empty" type="submit" class="btn btnSite">Empty cart</button>
+				</form>
+				<a href="{{ path('route_catalogue') }}">
+					<button class="btn btnSite">Continue shoping</button>
+				</a>
+			</div>
+		</div>
+		<div class="col-md-4 order-1 order-md-2 summary-table">
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="title-site">Summary</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Subtotal: {{ cart.getSubtotal() | number_format(2, '.',) }}$</td>
+					</tr>
+					<tr>
+						<td>TPS: {{ cart.getTps() | number_format(2, '.',)}}$</td>
+					</tr>
+					<tr>
+						<td>TVQ: {{ cart.getTvq() | number_format(2, '.',) }}$</td>
+					</tr>
+					<tr>
+						<td>Delivery fees: {{ cart.getDeliveryFee() | number_format(2, '.',) }}$</td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="{{ path('route_orderReview') }}"><button class="btn btnSite"><i class="fa-regular fa-credit-card"> Review Order</i> - {{ cart.getTotal() | number_format(2, '.',) }}$</button></a>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('styles/cart.css') }}">
+	<link rel="stylesheet" href="{{ asset('styles/base.css') }}">
+{% endblock %}

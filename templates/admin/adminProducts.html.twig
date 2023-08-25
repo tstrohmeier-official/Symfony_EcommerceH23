@@ -1,0 +1,44 @@
+{% extends 'core/base.html.twig' %}
+
+{% block title %}
+	Dark Rosted Coffee
+{% endblock %}
+
+{% block content %}
+	<h3 class="text-center mt-3 title-site">Admin - Products</h3>
+	{% include 'admin/navbarAdmin.html.twig' %}
+
+	<div class="row page">
+		<div class="col-8 mx-auto mb-3">
+		<a href="{{ path('route_adminAddProduct') }}"><button type="button" class="btn btnSite mt-5 mb-3">Add a new product</button></a>
+			<table class="table text-center table-bordered">
+				<thead class="table-dark">
+					<tr>
+						<th scope="col">Product number</th>
+						<th scope="col">Name</th>
+						<th scope="col">Category</th>
+						<th scope="col">Price</th>
+						<th scope="col">Edit product</i></th>
+					</tr>
+				</thead>
+				<tbody class="table-body">
+					{% for product in products %}
+						<tr>
+							<td>{{ product.idProduct }}</td>
+							<td>{{ product.name }}</td>
+							<td>{{ product.mainCategory.category }}</td>
+							<td>{{ product.price}}$</td>
+							<td><a href="{{ path('route_adminModifyProduct', {idProduct: product.idProduct}) }}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('styles/interfaceAdmin.css') }}">
+	<link rel="stylesheet" href="{{ asset('styles/base.css') }}">
+{% endblock %}

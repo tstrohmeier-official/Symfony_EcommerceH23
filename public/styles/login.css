@@ -1,0 +1,8 @@
+.body {
+   min-height: 57vh;
+}
+
+.panel {
+   border-radius: 15px;
+   border: 2px solid #16DB65;
+}

@@ -1,0 +1,20 @@
+.img-product {
+    height: 80px;
+    width: auto;
+}
+
+.page {
+    min-height: 55vh;
+}
+
+.table-body td{
+    vertical-align: middle;
+}
+
+.user-details li{
+    list-style: none;
+}
+
+.label {
+    font-weight: bold;
+}

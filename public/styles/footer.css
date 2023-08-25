@@ -1,0 +1,14 @@
+.footer {
+    margin-bottom: 4vh;
+    border-top: #141115 solid 2px;
+    color: grey;
+}
+
+.footer a{
+    text-decoration: none;
+}
+
+.footer li{
+    text-decoration: none;
+    color: grey;
+}

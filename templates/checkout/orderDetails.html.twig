@@ -1,0 +1,112 @@
+{% extends 'core/base.html.twig' %}
+
+{% block title %}
+	Dark Rosted Coffee
+{% endblock %}
+
+{% block content %}
+	<div class="row page">
+		<div class="col-10 mx-auto">
+			{% for flash in app.flashes('stateUpdated') %}
+				<div class="alert {{ flash.color }} notification mt-4">
+					<i class="{{ flash.icon }}"></i>
+					{{ flash.content }}</div>
+			{% endfor %}
+			<div class="col-12 d-flex justify-content-between mb-5">
+				<h4 class="title-site">Order #{{ order.idOrder }}</h4>
+				<h4 class="title-site">State:
+					{{ order.state }}</h4>
+				{% if is_granted("ROLE_ADMIN") %}
+					{{ form_start(formStatus) }}
+					{{ form_row(formStatus.state) }}
+					{{ form_end(formStatus) }}
+				{% endif %}
+
+			</div>
+			<div class="row col-12 user-details">
+				<div class="col-5 row h-25">
+					<div class="col-5 label">
+						<ul>
+							<li># Order</li>
+							<li>Number of items</li>
+							<li>Date of order</li>
+							<li>Date of Delivery</li>
+						</ul>
+					</div>
+					<div class="col-7">
+						<ul>
+							<li>{{ order.idOrder }}</li>
+							<li>{{ order.getProducts() | length }}</li>
+							<li>{{ order.orderDate | date("m/d/Y H:i", "America/Toronto") }}</li>
+							<li>{% if order.deliveryDate == null %}To come
+							{% else %}{{ order.deliveryDate | date("m/d/Y H:i", "America/Toronto") }}
+								{% endif %}</li>
+						</div>
+					</div>
+					<div class="col-4 row h-25">
+						<div class="col-6 label">
+							<ul>
+								<li>Sub-Total</li>
+								<li>Discount</li>
+								<li>Delivery Fees</li>
+								<li>Total(Taxes include)</li>
+							</ul>
+						</div>
+						<div class="col-6">
+							<ul>
+								<li>{{ order.getSubtotal() }}$</li>
+								<li>{{ order.getProducts() | length }}</li>
+								<li>{{ order.deliveryFee }}</li>
+								<li>{{ order.getTotalPrice() }}$</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-3 row h-25 d-flex justify-content-end">
+						<ul>
+							<li class="label">Delivery Address</li>
+							<li>{{ order.user.firstName }}
+								{{ order.user.lastName }}</li>
+							<li>{{ order.user.address }},
+								{{ order.user.town }},
+								{{ order.user.postalCode }}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-12 row">
+					<table class="table text-center table-bordered">
+						<thead class="table-dark">
+							<tr>
+								<th scope="col">Product</th>
+								<th scope="col">Name</th>
+								<th scope="col">Unit price</th>
+								<th scope="col">Quantity</th>
+								<th scope="col">Total</th>
+							</tr>
+						</thead>
+						<tbody class="table-body">
+							{% for purchase in order.getProducts() %}
+								<tr>
+									<td><img class="img-fluid img-product" src="{{ asset_if(purchase.product.imagePath, 'images/products/imageMissing.png') }}" alt="Image product"></td>
+									<td>{{ purchase.product.name }}</td>
+									<td>{{ purchase.product.price }}$</td>
+									<td>{{ purchase.quantity }}</td>
+									<td>{{ purchase.getTotal() }}$</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					<div></div>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}
+
+	{% block stylesheets %}
+		<link rel="stylesheet" href="{{ asset('styles/orderDetails.css') }}">
+		<link rel="stylesheet" href="{{ asset('styles/base.css') }}">
+	{% endblock %}
+
+	{% block javascripts %}
+		<script src="{{ asset('scripts/order.detail.js') }}"></script>
+	{% endblock %}

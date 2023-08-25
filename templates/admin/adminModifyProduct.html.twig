@@ -1,0 +1,53 @@
+{% extends 'core/base.html.twig' %}
+{% form_theme formProduct 'bootstrap_5_layout.html.twig' %}
+
+{% block content %}
+	<h3 class="text-center mt-3 title-site">Modify a product</h3>
+	{% include 'admin/navbarAdmin.html.twig' %}
+	<div class="col-lg-8 mx-auto m-5 p-3 page panel ">
+		{% for flash in app.flashes('productUpdated') %}
+			<div class="alert {{ flash.color }} notification mt-4">
+				<i class="{{ flash.icon }}"></i>
+				{{ flash.content }}</div>
+		{% endfor %}
+		{{ form_start(formProduct, {'attr': {'class': 'needs-validation-register', 'novalidate': 'novalidate' }}) }}
+		<div class="row">
+			<div class="col-4">
+				{{ form_row(formProduct.name ) }}
+			</div>
+			<div class="col-4">
+				{{ form_row(formProduct.price) }}
+			</div>
+			<div class="col-4">
+				{{ form_row(formProduct.mainCategory) }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				{{ form_row(formProduct.quantityInStock) }}
+			</div>
+			<div class="col-6">
+				{{ form_row(formProduct.image) }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				{{ form_row(formProduct.description) }}
+			</div>
+		</div>
+		<div class="d-flex justify-content-center">
+			{{ form_row(formProduct.create, { 'label': 'update' }) }}
+		</div>
+		{{ form_end(formProduct) }}
+	</div>
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('styles/interfaceAdmin.css') }}">
+	<link rel="stylesheet" href="{{ asset('styles/base.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+	<script defer src="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js"></script>
+	<script defer src="{{ asset('scripts/register.js')}}"></script>
+{% endblock %}

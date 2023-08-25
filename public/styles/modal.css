@@ -1,0 +1,40 @@
+.modal-header {
+    background-color: #141115;
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.img-product {
+    width: 120px;
+    height: auto;
+}
+
+
+.modal-footer {
+    background-color: #141115;
+}
+
+.modal-footer button {
+    font-weight: bold;
+}
+
+.modal-footer button:hover {
+    color: #F75C03;
+    background-color: white;
+}
+
+.product-modal {
+    text-decoration: none;
+    color: #141115;
+}
+
+.modal-body span {
+    font-weight: bold;
+}
+
+.infos-font {
+    font-size: 38px;
+    color: red;
+    margin-left: 0.5em;
+}

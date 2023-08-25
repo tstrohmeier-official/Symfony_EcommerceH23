@@ -1,0 +1,81 @@
+{% extends 'core/base.html.twig' %}
+
+{% block title %}
+	Dark Rosted Coffee
+{% endblock %}
+
+{% block content %}
+
+	<div class="row my-md-4 mx-xxl-5">
+		<div class="col-md-8">
+			<h3 class="title-site">Review your order</h3>
+			<table class="table text-center table-bordered">
+				<thead class="table-dark">
+					<tr>
+						<th scope="col">Product</th>
+						<th scope="col">Name</th>
+						<th scope="col">Unit price</th>
+						<th scope="col">Quantity</th>
+						<th scope="col">Total</th>
+					</tr>
+				</thead>
+				<tbody class="table-body">
+					{% for purchase in cart.items %}
+						<tr>
+							<td><img class="img-fluid img-product" src="{{ asset_if(purchase.product.imagePath, 'images/products/imageMissing.png') }}" alt="Image product"></td>
+							<td>{{ purchase.product.name }}</td>
+							<td>{{ purchase.product.price }}$</td>
+							<td>{{ purchase.quantity }}</td>
+							<td>{{ purchase.price * purchase.quantity }}$</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-4 summary-table">
+			<h3 class="title-site">Delivery informations</h3>
+			<p>{{ user.lastName }} {{ user.firstName }}</p>
+			<p>{{ user.email }}</p>
+			<p>{{ user.address }}, {{ user.postalCode }}, {{ user.province }}</p>
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="title-site">Summary</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Subtotal:
+							{{ cart.getSubtotal() | number_format(2, '.',) }}$</td>
+					</tr>
+					<tr>
+						<td>TPS:
+							{{ cart.getTps() | number_format(2, '.',)}}$</td>
+					</tr>
+					<tr>
+						<td>TVQ:
+							{{ cart.getTvq() | number_format(2, '.',) }}$</td>
+					</tr>
+					<tr>
+						<td>Delivery fees:
+							{{ cart.getDeliveryFee() | number_format(2, '.',) }}$</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>*Estimated total*</p>
+			<a href="{{ path('stripe_chechout') }}">
+				<button class="btnSite btn">
+					<i class="fa-regular fa-credit-card">
+						Order</i>
+					-
+					{{ cart.getTotal() | number_format(2, '.',) }}$</button>
+			</a>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('styles/orderReview.css') }}">
+	<link rel="stylesheet" href="{{ asset('styles/base.css') }}">
+{% endblock %}

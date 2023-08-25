@@ -1,0 +1,73 @@
+{% extends 'core/base.html.twig' %}
+{% form_theme accountModificationFormType 'bootstrap_5_layout.html.twig' %}
+{% form_theme accountPasswordModificationFormType 'bootstrap_5_layout.html.twig' %}
+{% block content %}
+	<div class="container py-3 body">
+		<div class="row">
+			{% for flash in app.flashes('user')%}
+				<div class="alert {{ flash.color }}">{{ flash.content }}</div>
+			{% endfor %}
+			<div class="col-8 mx-auto p-3 panel">
+				<div class="text-center">
+					<h3 class="title-site">Your profil</h3>
+				</div>
+				<div class="row mb-2">
+					<div class="col-12">
+						<label for="registration_form_email" class="form-label required">Email</label>
+						<input id="inputEmail" type="text" class="form-control" value="{{ email }}" disabled="">
+					</div>
+				</div>
+				{{ form_start(accountModificationFormType, {'attr': {'class': 'needs-validation-register', 'novalidate': 'novalidate' }}) }}
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(accountModificationFormType.lastName) }}
+					</div>
+					<div class="col-6">
+						{{ form_row(accountModificationFormType.firstName) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-8">
+						{{ form_row(accountModificationFormType.address, {'attr': {'class': 'txtAddress'}}) }}
+					</div>
+					<div class="col-4">
+						{{ form_row(accountModificationFormType.town) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-4">
+						{{ form_row(accountModificationFormType.postalCode, {'attr': {'class': 'txtPostalCode'}}) }}
+					</div>
+					<div class="col-4">
+						{{ form_row(accountModificationFormType.province) }}
+					</div>
+					<div class="col-4">
+						{{ form_row(accountModificationFormType.phone, {'attr': {'class': 'txtPhone'}}) }}
+					</div>
+				</div>
+				<div class="d-flex justify-content-center">
+					{{ form_row(accountModificationFormType.create) }}
+				</div>
+				{{ form_end(accountModificationFormType) }}
+			</div>
+			<div class="col-6 mx-auto mt-3 panel p-3">
+				{{ form_start(accountPasswordModificationFormType, {'attr': {'class': 'needs-validation-register', 'novalidate': 'novalidate' }}) }}
+				<div class="row">
+					{{ form_row(accountPasswordModificationFormType.currentPassword) }}
+					{{ form_row(accountPasswordModificationFormType.newPassword) }}
+				</div>
+				<div class="d-flex justify-content-center">
+					{{ form_end(accountPasswordModificationFormType) }}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('styles/login.css') }}">
+	<link rel="stylesheet" href="{{ asset('styles/base.css') }}">
+{% endblock %}
+{% block javascripts %}
+	<script defer src="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js"></script>
+	<script defer src="{{ asset('scripts/register.js')}}"></script>
+{% endblock %}
